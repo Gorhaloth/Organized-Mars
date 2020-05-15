@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/EyeEase_WalkingAnim.png-dd259c43badf1995e3a7e08c0934e7c6.stex"
+path="res://.import/EyeEase SideWalk.png-a19c6d2e5fe7af35e0184dee4051550b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/EyeEase_WalkingAnim.png"
-dest_files=[ "res://.import/EyeEase_WalkingAnim.png-dd259c43badf1995e3a7e08c0934e7c6.stex" ]
+source_file="res://Assets/EyeEase SideWalk.png"
+dest_files=[ "res://.import/EyeEase SideWalk.png-a19c6d2e5fe7af35e0184dee4051550b.stex" ]
 
 [params]
 
