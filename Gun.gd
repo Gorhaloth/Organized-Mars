@@ -15,17 +15,16 @@ func _process(delta):
 	rotation += mouse_position.angle()
 	var degree = rad2deg($Degree.global_rotation)
 	if degree < -90:
-		$Degree/Sprite.flip_v=true
+		$Degree/Sprite.flip_v = true
 	elif degree > 90:
-		$Degree/Sprite.flip_v=true
+		$Degree/Sprite.flip_v = true
 	else:
-		$Degree/Sprite.flip_v=false
+		$Degree/Sprite.flip_v = false
 	if Input.is_action_just_pressed("fire") and $Degree/RayCast2D.is_colliding() == true:	
 		var distance = $Degree.get_global_position().distance_to($Degree/RayCast2D.get_collision_point())
-		print(distance)
 		$Degree/Beam.visible = true
-		$Degree/Beam.add_point(Vector2(distance,0),0)
-		$Degree/Beam.add_point(Vector2(0,0),1)
+		$Degree/Beam.add_point(Vector2(0,0),0)
+		$Degree/Beam.add_point(Vector2(distance,0),1)
 		var timer = $Degree/Timer.start()
 #	elif Input.is_action_pressed("fire") and $Degree/RayCast2D.is_colliding()==false:
 #		$Degree/Sprite/Beam.visible = true
