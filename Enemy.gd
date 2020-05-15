@@ -10,16 +10,18 @@ var y
 
 
 func _ready():
-	Player = get_node("../Player")
+	if get_parent().has_node("Player"):
+		Player = get_node("../Player")
 
 func _physics_process(delta):
-	if abs((Player.position - position).length()) > 2:
-		velocity = (Player.position - position).normalized() * 2
-		angle = velocity.angle()
-		set_animation()
-	else:
-		velocity = Vector2(0,0)
-	position += velocity
+	if get_parent().has_node("Player"):
+		if abs((Player.position - position).length()) > 2:
+			velocity = (Player.position - position).normalized() * 2
+			angle = velocity.angle()
+			set_animation()
+		else:
+			velocity = Vector2(0,0)
+		position += velocity
 
 func set_animation():
 	x = cos(angle)
@@ -43,5 +45,3 @@ func set_animation():
 		[true, false, false, false]:
 			$Sprite.animation = "Down"
 			$Sprite.flip_v = false
-			
-			
