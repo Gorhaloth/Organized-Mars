@@ -7,14 +7,18 @@ var angle
 var direction
 var x
 var y
+var Gun
 
 
 func _ready():
-	if get_parent().has_node("Player"):
-		Player = get_node("../Player")
+	Player = get_node_or_null("../Player")
+	Gun = get_node_or_null("../Player/Gun")
+	if Gun != null:
+		Gun.connect("hit", self, "_on_hit")
+	
 
 func _physics_process(delta):
-	if get_parent().has_node("Player"):
+	if Player != null:
 		if abs((Player.position - position).length()) > 2:
 			velocity = (Player.position - position).normalized() * 2
 			angle = velocity.angle()
@@ -22,6 +26,11 @@ func _physics_process(delta):
 		else:
 			velocity = Vector2(0,0)
 		position += velocity
+	#print(get_node("res://Player/Player.tscn"))
+
+func _on_hit(body):
+	if body == $Area2D:
+		queue_free()
 
 func set_animation():
 	x = cos(angle)

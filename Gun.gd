@@ -1,11 +1,10 @@
 extends Position2D
 
 var mouse_position
-
+signal hit(body)
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +19,8 @@ func _process(delta):
 		$Degree/Sprite.flip_v = true
 	else:
 		$Degree/Sprite.flip_v = false
-	if Input.is_action_just_pressed("fire") and $Degree/RayCast2D.is_colliding() == true:	
+	if Input.is_action_just_pressed("fire") and $Degree/RayCast2D.is_colliding() == true:
+		emit_signal("hit", $Degree/RayCast2D.get_collider())	
 		var distance = $Degree.get_global_position().distance_to($Degree/RayCast2D.get_collision_point())
 		$Degree/Beam.visible = true
 		$Degree/Beam.add_point(Vector2(0,0),0)
