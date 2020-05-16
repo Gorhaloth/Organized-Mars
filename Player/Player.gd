@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-
+var health = 3
 const MAX_SPEED = 500
 const ACCELERATION = 1300
 const FRICTION = 800
@@ -26,7 +26,10 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func been_hit():
+	health -= 1
 	$AnimationPlayer.play("Hurt")
+	if(health <= 0):
+		queue_free()
 
 func direction():
 	match input_vector:

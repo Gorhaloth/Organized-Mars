@@ -8,6 +8,7 @@ var direction
 var x
 var y
 var Gun
+var health = 3
 
 signal hit_player()
 
@@ -31,8 +32,7 @@ func _physics_process(delta):
 	#print(get_node("res://Player/Player.tscn"))
 
 func _on_hit(body):
-	if body == $Area2D:
-		queue_free()
+	$AnimationPlayer.play("Hurt")
 
 func set_animation():
 	x = cos(angle)
@@ -59,3 +59,9 @@ func set_animation():
 
 func _on_Area2D_body_entered(body):
 	emit_signal("hit_player")
+
+
+func _on_AnimationPlayer_animation_finished(Hurt):
+	health -= 1
+	if health <= 0:
+		queue_free()

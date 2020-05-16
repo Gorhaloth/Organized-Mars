@@ -145,17 +145,14 @@ tracks/0/keys = {
 }
 
 [node name="Enemy" type="Node2D"]
-position = Vector2( 0.0921478, 0 )
+scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 27 )
 animation = "Down"
-frame = 5
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -169,3 +166,4 @@ shape = SubResource( 28 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Hurt = SubResource( 29 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
