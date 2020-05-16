@@ -8,6 +8,7 @@ var direction
 var x
 var y
 var Gun
+var aggro = false
 
 signal hit_player()
 
@@ -20,7 +21,7 @@ func _ready():
 	
 
 func _physics_process(delta):
-	if Player != null:
+	if Player != null && aggro:
 		if abs((Player.position - position).length()) > 2:
 			velocity = (Player.position - position).normalized() * 1
 			angle = velocity.angle()
@@ -59,3 +60,8 @@ func set_animation():
 
 func _on_Area2D_body_entered(body):
 	emit_signal("hit_player")
+
+
+func _on_DetectionArea_body_entered(body):
+	if body == Player:
+		aggro = true
