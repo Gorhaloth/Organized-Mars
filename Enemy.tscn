@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=40 format=2]
-
 
 [ext_resource path="res://Assets/EyeEase_WalkingAnim.png" type="Texture" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
@@ -115,10 +113,7 @@ region = Rect2( 32, 96, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 64, 96, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 32, 32 )
-
+[sub_resource type="AtlasTexture" id=28]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
@@ -135,18 +130,16 @@ animations = [ {
 "name": "Up",
 "speed": 5.0
 }, {
-
-"frames": [ SubResource( 31 ) ],
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
 "loop": true,
-"name": "Die",
-"speed": 5.0
-
+"name": "Down",
+"speed": 6.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 32.0952, 28.6996 )
 
-[sub_resource type="Shader" id=36]
+[sub_resource type="Shader" id=30]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -156,11 +149,10 @@ float lum = (COLOR.r+COLOR.g+COLOR.b)/3.0;//get the average
 COLOR.xyz = vec3(lum);//set the average to get grayscale
 }"
 
-[sub_resource type="ShaderMaterial" id=34]
+[sub_resource type="ShaderMaterial" id=31]
 shader = SubResource( 36 )
 
 [sub_resource type="Animation" id=32]
-
 resource_name = "Die"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -188,7 +180,7 @@ tracks/1/keys = {
 "values": [ SubResource( 34 ) ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=33]
 resource_name = "Hurt"
 
 tracks/0/type = "value"
@@ -204,7 +196,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.0980392, 0.0980392, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=34]
 resource_name = "Reset"
 length = 0.001
 tracks/0/type = "value"
@@ -232,7 +224,7 @@ tracks/1/keys = {
 "values": [ null ]
 }
 
-[sub_resource type="CircleShape2D" id=30]
+[sub_resource type="CircleShape2D" id=35]
 
 radius = 128.049
 
@@ -265,14 +257,14 @@ shape = SubResource( 29 )
 
 autoplay = "Reset"
 anims/Die = SubResource( 32 )
-anims/Hurt = SubResource( 29 )
-anims/Reset = SubResource( 35 )
+anims/Hurt = SubResource( 33 )
+anims/Reset = SubResource( 34 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource( 32 )
+shape = SubResource( 35 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
