@@ -39,7 +39,6 @@ func _on_hit(body):
 		$AnimationPlayer.play("Hurt")
 	if body == $Area2D && health <= 0:
 		Player = null
-		$Sprite.animation = "Die"
 		$AnimationPlayer.play("Die")
 
 
@@ -74,8 +73,10 @@ func _on_DetectionArea_body_entered(body):
 	if body == Player:
 		aggro = true
 
+
 func killed():
 	Player = null
+
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

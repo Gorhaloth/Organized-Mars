@@ -1,4 +1,6 @@
-[gd_scene load_steps=37 format=2]
+
+[gd_scene load_steps=40 format=2]
+
 
 [ext_resource path="res://Assets/EyeEase_WalkingAnim.png" type="Texture" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
@@ -113,7 +115,10 @@ region = Rect2( 32, 96, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 64, 96, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=28]
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
@@ -130,16 +135,32 @@ animations = [ {
 "name": "Up",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+
+"frames": [ SubResource( 31 ) ],
 "loop": true,
-"name": "Down",
-"speed": 6.0
+"name": "Die",
+"speed": 5.0
+
 } ]
 
 [sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 32.0952, 28.6996 )
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Shader" id=36]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+void fragment() {
+COLOR = texture(TEXTURE, UV);//setup the default image
+float lum = (COLOR.r+COLOR.g+COLOR.b)/3.0;//get the average
+COLOR.xyz = vec3(lum);//set the average to get grayscale
+}"
+
+[sub_resource type="ShaderMaterial" id=34]
+shader = SubResource( 36 )
+
+[sub_resource type="Animation" id=32]
+
 resource_name = "Die"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -149,12 +170,27 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+
+"transitions": PoolRealArray( 1, 0.225313 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 0.352941, 0.352941, 0.352941, 1 ), Color( 0.352941, 0.352941, 0.352941, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 34 ) ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=29]
+resource_name = "Hurt"
+
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
@@ -168,20 +204,52 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.0980392, 0.0980392, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=32]
+[sub_resource type="Animation" id=35]
+resource_name = "Reset"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
+
+[sub_resource type="CircleShape2D" id=30]
+
 radius = 128.049
 
 [node name="Enemy" type="Node2D"]
 position = Vector2( 0.0921478, 0 )
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_editor_description_": ""
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+use_parent_material = true
 scale = Vector2( 2, 2 )
 frames = SubResource( 28 )
 animation = "Down"
+frame = 7
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -194,8 +262,11 @@ collision_mask = 7
 shape = SubResource( 29 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Die = SubResource( 30 )
-anims/Hurt = SubResource( 31 )
+
+autoplay = "Reset"
+anims/Die = SubResource( 32 )
+anims/Hurt = SubResource( 29 )
+anims/Reset = SubResource( 35 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
 visible = false
