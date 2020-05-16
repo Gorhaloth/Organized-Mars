@@ -9,6 +9,7 @@ var x
 var y
 var Gun
 var aggro = false
+var health = 3
 
 signal hit_player()
 
@@ -32,9 +33,12 @@ func _physics_process(delta):
 	#print(get_node("res://Player/Player.tscn"))
 
 func _on_hit(body):
+	Player.connect("dead", self, "killed")
 	if body == $Area2D:
+		health -= 1
+		$AnimationPlayer.play("Hurt")
+	if body == $Area2D && health <= 0:
 		Player = null
-		$Sprite.playing = false
 		$AnimationPlayer.play("Die")
 
 
@@ -69,6 +73,9 @@ func _on_DetectionArea_body_entered(body):
 	if body == Player:
 		aggro = true
 
+
+func killed():
+	Player = null
 
 
 
