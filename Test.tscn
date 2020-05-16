@@ -10,4 +10,9 @@ position = Vector2( 140.174, 67.4299 )
 
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
 position = Vector2( 43.0035, 43.5731 )
-scale = Vector2( 2, 2 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 353.58, 210.653 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 1 )]
+position = Vector2( -9.47888, 274.429 )

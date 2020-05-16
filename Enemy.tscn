@@ -115,37 +115,38 @@ animations = [ {
 "name": "Side",
 "speed": 5.0
 }, {
-"frames": [  ],
-"loop": true,
-"name": "Up",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
 "loop": true,
 "name": "Down",
 "speed": 6.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "Up",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=28]
-extents = Vector2( 42.1064, 41.1383 )
+extents = Vector2( 32.0952, 28.6996 )
 
 [node name="Enemy" type="Node2D"]
+position = Vector2( 0.0921478, 0 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
 frames = SubResource( 27 )
 animation = "Down"
-frame = 4
+frame = 7
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
+position = Vector2( 0, -4 )
 collision_layer = 6
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 shape = SubResource( 28 )

@@ -20,7 +20,7 @@ func _ready():
 func _physics_process(delta):
 	if Player != null:
 		if abs((Player.position - position).length()) > 2:
-			velocity = (Player.position - position).normalized() * 2
+			velocity = (Player.position - position).normalized() * 1
 			angle = velocity.angle()
 			set_animation()
 		else:
@@ -50,7 +50,6 @@ func set_animation():
 			$Sprite.flip_h = false
 		[false, true, false, false]:
 			$Sprite.animation = "Down"
-			$Sprite.flip_v = true
 		[true, false, false, false]:
 			$Sprite.animation = "Down"
-			$Sprite.flip_v = false
+
