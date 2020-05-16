@@ -33,7 +33,10 @@ func _physics_process(delta):
 
 func _on_hit(body):
 	if body == $Area2D:
-		queue_free()
+		Player = null
+		$Sprite.animation = "Die"
+		$AnimationPlayer.play("Die")
+
 
 func set_animation():
 	x = cos(angle)
@@ -65,3 +68,10 @@ func _on_Area2D_body_entered(body):
 func _on_DetectionArea_body_entered(body):
 	if body == Player:
 		aggro = true
+
+
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Die":
+		queue_free()

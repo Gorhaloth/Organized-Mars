@@ -33,19 +33,19 @@ func direction():
 		Vector2(-1,0), Vector2(-1,1), Vector2(-1,-1):
 			$Sprite.animation = "Left"
 			$Sprite.playing = true
-			$Gun.z_index = -1
+			$Gun.z_index = 0
 		Vector2(1,0), Vector2(1,-1), Vector2(1,1):
 			$Sprite.animation = "Right"
 			$Sprite.playing = true
-			$Gun.z_index = 0
+			$Gun.z_index = 1
 		Vector2(0,-1):
 			$Sprite.animation = "Up"
 			$Sprite.playing = true
-			$Gun.z_index = -1
+			$Gun.z_index = 0
 		Vector2(0,1):
 			$Sprite.animation = "Down"
 			$Sprite.playing = true
-			$Gun.z_index = 0
+			$Gun.z_index = 1
 		Vector2(0,0):
 			$Sprite.playing = false
 			$Sprite.frame = 1	
