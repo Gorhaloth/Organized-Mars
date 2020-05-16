@@ -7,6 +7,7 @@ const FRICTION = 800
 var velocity = Vector2.ZERO
 var input_vector
 var Enemy
+var health = 3
 
 func _ready():
 	Enemy = get_node_or_null("../Enemy")
@@ -26,7 +27,10 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func been_hit():
+	health -= 1
 	$AnimationPlayer.play("Hurt")
+	if health <= 0:
+		queue_free()
 
 func direction():
 	match input_vector:

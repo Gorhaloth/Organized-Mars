@@ -9,6 +9,7 @@ var x
 var y
 var Gun
 var aggro = false
+var health = 3
 
 signal hit_player()
 
@@ -33,6 +34,9 @@ func _physics_process(delta):
 
 func _on_hit(body):
 	if body == $Area2D:
+		health -= 1
+		$AnimationPlayer.play("Hurt")
+	if body == $Area2D && health <= 0:
 		Player = null
 		$Sprite.animation = "Die"
 		$AnimationPlayer.play("Die")
