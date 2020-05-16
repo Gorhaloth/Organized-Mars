@@ -34,7 +34,7 @@ func _physics_process(delta):
 func _on_hit(body):
 	if body == $Area2D:
 		Player = null
-		$Sprite.animation = "Die"
+		$Sprite.playing = false
 		$AnimationPlayer.play("Die")
 
 
