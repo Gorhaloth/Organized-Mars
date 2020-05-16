@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var health = 3
+
 const MAX_SPEED = 500
 const ACCELERATION = 1300
 const FRICTION = 800
@@ -26,29 +26,26 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func been_hit():
-	health -= 1
 	$AnimationPlayer.play("Hurt")
-	if(health <= 0):
-		queue_free()
 
 func direction():
 	match input_vector:
 		Vector2(-1,0), Vector2(-1,1), Vector2(-1,-1):
 			$Sprite.animation = "Left"
 			$Sprite.playing = true
-			$Gun.z_index = -1
+			$Gun.z_index = 0
 		Vector2(1,0), Vector2(1,-1), Vector2(1,1):
 			$Sprite.animation = "Right"
 			$Sprite.playing = true
-			$Gun.z_index = 0
+			$Gun.z_index = 1
 		Vector2(0,-1):
 			$Sprite.animation = "Up"
 			$Sprite.playing = true
-			$Gun.z_index = -1
+			$Gun.z_index = 0
 		Vector2(0,1):
 			$Sprite.animation = "Down"
 			$Sprite.playing = true
-			$Gun.z_index = 0
+			$Gun.z_index = 1
 		Vector2(0,0):
 			$Sprite.playing = false
 			$Sprite.frame = 1	

@@ -8,11 +8,7 @@ var direction
 var x
 var y
 var Gun
-<<<<<<< HEAD
-var health = 3
-=======
 var aggro = false
->>>>>>> a2880f9bf48d7b4ec22fb479a659f92e5f5b9e36
 
 signal hit_player()
 
@@ -36,7 +32,11 @@ func _physics_process(delta):
 	#print(get_node("res://Player/Player.tscn"))
 
 func _on_hit(body):
-	$AnimationPlayer.play("Hurt")
+	if body == $Area2D:
+		Player = null
+		$Sprite.animation = "Die"
+		$AnimationPlayer.play("Die")
+
 
 func set_animation():
 	x = cos(angle)
@@ -65,13 +65,13 @@ func _on_Area2D_body_entered(body):
 	emit_signal("hit_player")
 
 
-<<<<<<< HEAD
-func _on_AnimationPlayer_animation_finished(Hurt):
-	health -= 1
-	if health <= 0:
-		queue_free()
-=======
 func _on_DetectionArea_body_entered(body):
 	if body == Player:
 		aggro = true
->>>>>>> a2880f9bf48d7b4ec22fb479a659f92e5f5b9e36
+
+
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Die":
+		queue_free()
