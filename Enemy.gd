@@ -9,6 +9,8 @@ var x
 var y
 var Gun
 
+signal hit_player()
+
 
 func _ready():
 	Player = get_node_or_null("../Player")
@@ -53,3 +55,7 @@ func set_animation():
 		[true, false, false, false]:
 			$Sprite.animation = "Down"
 
+
+
+func _on_Area2D_body_entered(body):
+	emit_signal("hit_player")

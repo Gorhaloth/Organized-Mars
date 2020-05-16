@@ -6,6 +6,12 @@ const ACCELERATION = 1300
 const FRICTION = 800
 var velocity = Vector2.ZERO
 var input_vector
+var Enemy
+
+func _ready():
+	Enemy = get_node_or_null("../Enemy")
+	if Enemy != null:
+		Enemy.connect("hit_player", self, "been_hit")
 
 func _physics_process(delta):
 	input_vector = Vector2.ZERO
@@ -19,7 +25,7 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	velocity = move_and_slide(velocity)
 
-func _on_Area2D_body_entered(body):
+func been_hit():
 	$AnimationPlayer.play("Hurt")
 
 func direction():
