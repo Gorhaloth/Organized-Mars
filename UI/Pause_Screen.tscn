@@ -39,8 +39,6 @@ margin_right = 261.0
 margin_bottom = 149.0
 
 [node name="TextureButton" type="TextureButton" parent="MarginContainer/CenterContainer/VBoxContainer"]
-anchor_left = 0.36
-anchor_right = 0.36
 margin_right = 96.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 3 )

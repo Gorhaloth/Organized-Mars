@@ -23,7 +23,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Player != null && aggro:
-		if abs((Player.position - position).length()) > 2:
+		if abs((Player.position - position).length()) > 25:
 			velocity = (Player.position - position).normalized() * 1
 			angle = velocity.angle()
 			set_animation()
@@ -38,6 +38,8 @@ func _on_hit(body):
 		$AnimationPlayer.play("Hurt")
 	if body == $Area2D && health <= 0:
 		Player = null
+		$Sprite.playing = false
+		$Area2D.queue_free()
 		$AnimationPlayer.play("Die")
 
 
@@ -58,9 +60,11 @@ func set_animation():
 			$Sprite.animation = "Side"
 			$Sprite.flip_h = false
 		[false, true, false, false]:
-			$Sprite.animation = "Down"
+			$Sprite.animation = "Up"
 		[true, false, false, false]:
 			$Sprite.animation = "Down"
+	if abs((Player.position - position).length()) < 28:
+		$Sprite.animation += "Attack"
 
 
 
