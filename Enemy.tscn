@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://Enemy.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 38.4548, 39.6501 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.7224, 31.1921 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "Reset"
+[sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -33,20 +33,22 @@ tracks/1/keys = {
 "values": [ null ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 89.1274
+[sub_resource type="CircleShape2D" id=3]
+radius = 120.651
 
 [node name="Enemy" type="Node2D"]
 position = Vector2( 0.0921478, 0 )
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_group_": true,
 "_editor_description_": ""
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
 scale = Vector2( 2, 2 )
+frames = ExtResource( 1 )
+animation = "Down"
+frame = 11
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -55,16 +57,16 @@ collision_layer = 6
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Reset"
-anims/Reset = SubResource( 1 )
+anims/Reset = SubResource( 2 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]

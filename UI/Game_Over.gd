@@ -9,14 +9,13 @@ var Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
 	Player = get_node_or_null("../../Player")
 	if Player != null:
 		Player.connect("dead", self, "game_over")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
 
 func game_over():
 	print('hello')
@@ -25,8 +24,9 @@ func game_over():
 
 
 func _on_TextureButton_pressed():
-	pass # Replace with function body.
+	print('hello')
 
 
 func _on_TextureButton2_pressed():
+	print('hello')
 	get_tree().quit()
