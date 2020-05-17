@@ -50,7 +50,7 @@ use_parent_material = true
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "Down"
-frame = 7
+frame = 11
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
