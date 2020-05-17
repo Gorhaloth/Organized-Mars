@@ -31,7 +31,9 @@
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 59.9711, 62.8148 )
 
-[node name="Enviornment_TEST" type="Node2D"]
+[node name="Enviornment_TEST" type="Node2D" groups=[
+"Enemy",
+]]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )

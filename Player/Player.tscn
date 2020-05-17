@@ -335,7 +335,6 @@ centered = false
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 58 )
 animation = "Right"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -356,6 +355,7 @@ z_as_relative = false
 current = true
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 61 )

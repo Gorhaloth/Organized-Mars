@@ -13,9 +13,7 @@ var power = 30
 signal dead()
 
 func _ready():
-	Enemy = get_node_or_null("../Enemy")
-	if Enemy != null:
-		Enemy.connect("hit_player", self, "been_hit")
+	pass
 
 func _physics_process(delta):
 	input_vector = Vector2.ZERO
@@ -28,13 +26,6 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	velocity = move_and_slide(velocity)
-
-func been_hit():
-	health = clamp(health -1, 0 ,11)
-	$HUD/HealthBar.frame = health
-	$AnimationPlayer.play("Hurt")
-	if health <= 0:
-		emit_signal("dead")
 
 func direction():
 	match input_vector:
@@ -61,4 +52,8 @@ func direction():
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group('Enemy'):
-		print('bang')
+		health = clamp(health -1, 0 ,11)
+		$HUD/HealthBar.frame = health
+		$AnimationPlayer.play("Hurt")
+		if health <= 0:
+			emit_signal("dead")
