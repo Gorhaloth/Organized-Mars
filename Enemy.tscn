@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Enemy.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Die.tres" type="Animation" id=3]
+[ext_resource path="res://Hurt_Enemy.tres" type="Animation" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.7224, 31.1921 )
@@ -48,7 +50,7 @@ use_parent_material = true
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "Down"
-frame = 11
+frame = 7
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -61,6 +63,8 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Reset"
+anims/Die = ExtResource( 3 )
+anims/Hurt = ExtResource( 4 )
 anims/Reset = SubResource( 2 )
 
 [node name="DetectionArea" type="Area2D" parent="."]

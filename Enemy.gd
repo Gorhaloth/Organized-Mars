@@ -39,7 +39,6 @@ func _on_hit(body):
 	if body == $Area2D && health <= 0:
 		Player = null
 		$Sprite.playing = false
-		$Area2D.queue_free()
 		$AnimationPlayer.play("Die")
 
 
