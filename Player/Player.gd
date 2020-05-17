@@ -9,8 +9,6 @@ var input_vector
 var Enemy
 var health = 3
 
-signal dead()
-
 func _ready():
 	Enemy = get_node_or_null("../Enemy")
 	if Enemy != null:
@@ -32,7 +30,7 @@ func been_hit():
 	health -= 1
 	$AnimationPlayer.play("Hurt")
 	if health <= 0:
-		emit_signal("dead")
+		get_tree().paused = true
 		queue_free()
 
 func direction():
