@@ -7,15 +7,15 @@ const FRICTION = 800
 var velocity = Vector2.ZERO
 var input_vector
 var Enemy
-var health = 3
+var health = 11
+var power = 30
 
 signal dead()
 
 func _ready():
-#	Enemy = get_node_or_null("../Enemy")
-#	if Enemy != null:
-#		Enemy.connect("hit_player", self, "been_hit")
-	pass
+	Enemy = get_node_or_null("../Enemy")
+	if Enemy != null:
+		Enemy.connect("hit_player", self, "been_hit")
 
 func _physics_process(delta):
 	input_vector = Vector2.ZERO
@@ -29,11 +29,12 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	velocity = move_and_slide(velocity)
 
-#func been_hit():
-#	health -= 1
-#	$AnimationPlayer.play("Hurt")
-#	if health <= 0:
-#		emit_signal("dead")
+func been_hit():
+	health = clamp(health -1, 0 ,11)
+	$HUD/HealthBar.frame = health
+	$AnimationPlayer.play("Hurt")
+	if health <= 0:
+		emit_signal("dead")
 
 func direction():
 	match input_vector:
@@ -56,12 +57,3 @@ func direction():
 		Vector2(0,0):
 			$Sprite.playing = false
 			$Sprite.frame = 1	
-
-
-func _on_Area2D_area_entered(area):
-	area.is_in_group('Enemy')
-	if area.is_in_group('Enemy'):
-		health -= 1
-		$AnimationPlayer.play("Hurt")
-		if health <= 0:
-			emit_signal("dead")
