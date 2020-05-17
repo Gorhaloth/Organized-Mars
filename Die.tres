@@ -1,4 +1,19 @@
-[gd_resource type="Animation" format=2]
+[gd_resource type="Animation" load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+void fragment() {
+COLOR = texture(TEXTURE, UV);//setup the default image
+float lum = (COLOR.r+COLOR.g+COLOR.b)/3.0;//get the average
+COLOR.xyz = vec3(lum);//set the average to get grayscale
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
 [resource]
 resource_name = "Die"
@@ -13,4 +28,16 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 2 ) ]
 }
