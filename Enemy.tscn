@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Enemy.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
@@ -53,6 +53,9 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=5]
 radius = 120.651
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 28.1518, 24.9369 )
+
 [node name="Enemy" type="Node2D"]
 script = ExtResource( 2 )
 __meta__ = {
@@ -64,7 +67,6 @@ use_parent_material = true
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "Down"
-frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -88,6 +90,11 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource( 5 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 9 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
