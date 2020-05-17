@@ -63,5 +63,7 @@ shape = SubResource( 2 )
 [node name="Pause_Screen" parent="CanvasLayer" instance=ExtResource( 5 )]
 visible = false
 
-[node name="Game_Over" parent="CanvasLayer" instance=ExtResource( 6 )]
+[node name="Game_Over" parent="CanvasLayer" groups=[
+"Enemy",
+] instance=ExtResource( 6 )]
 visible = false

@@ -50,13 +50,12 @@ use_parent_material = true
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "SideAttack"
-frame = 4
+frame = 9
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, -4 )
-collision_layer = 6
+collision_layer = 2
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -69,7 +68,8 @@ anims/Hurt = ExtResource( 4 )
 anims/Reset = SubResource( 2 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
-visible = false
+collision_layer = 2
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource( 3 )
