@@ -61,8 +61,10 @@ func set_animation():
 			$Sprite.flip_h = false
 		[false, true, false, false]:
 			$Sprite.animation = "Up"
+			$Sprite.flip_h = false
 		[true, false, false, false]:
 			$Sprite.animation = "Down"
+			$Sprite.flip_h = false
 	if abs((Player.position - position).length()) < 28:
 		$Sprite.animation += "Attack"
 
@@ -71,12 +73,9 @@ func set_animation():
 func _on_Area2D_body_entered(body):
 	emit_signal("hit_player")
 
-
 func _on_DetectionArea_body_entered(body):
 	if body == Player:
 		aggro = true
-
-
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Die":

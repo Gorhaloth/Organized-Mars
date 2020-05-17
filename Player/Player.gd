@@ -7,7 +7,8 @@ const FRICTION = 800
 var velocity = Vector2.ZERO
 var input_vector
 var Enemy
-var health = 3
+var health = 11
+var power = 30
 
 signal dead()
 
@@ -29,7 +30,8 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func been_hit():
-	health -= 1
+	health = clamp(health -1, 0 ,11)
+	$HUD/HealthBar.frame = health
 	$AnimationPlayer.play("Hurt")
 	if health <= 0:
 		emit_signal("dead")
