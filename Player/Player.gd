@@ -9,6 +9,7 @@ var input_vector
 var Enemy
 var health = 11
 var power = 30
+onready var timer = $Timer
 
 signal dead()
 
@@ -49,11 +50,27 @@ func direction():
 			$Sprite.playing = false
 			$Sprite.frame = 1	
 
+func redo_Area2d_entered():
+	health = clamp(health -1, 0 ,11)
+	$HUD/HealthBar.frame = health
+	$AnimationPlayer.play("Hurt")
+	timer.start()
+	if health <= 0:
+		emit_signal("dead")
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group('Enemy'):
 		health = clamp(health -1, 0 ,11)
 		$HUD/HealthBar.frame = health
 		$AnimationPlayer.play("Hurt")
+		timer.start()
 		if health <= 0:
 			emit_signal("dead")
+
+
+func _on_Timer_timeout():
+	redo_Area2d_entered()
+
+
+func _on_Area2D_area_exited(area):
+	timer.stop()
