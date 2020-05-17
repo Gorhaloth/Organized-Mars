@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 var distance
 var velocity = Vector2(0,0)
@@ -30,7 +30,7 @@ func _physics_process(delta):
 			set_animation()
 		else:
 			velocity = Vector2(0,0)
-		position += velocity
+		move_and_collide(velocity)
 	#print(get_node("res://Player/Player.tscn"))
 
 func _on_hit(body):

@@ -305,7 +305,7 @@ extents = Vector2( 15.0397, 20.7277 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
-collision_mask = 7
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="HUD" type="Control" parent="."]
@@ -335,6 +335,7 @@ centered = false
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 58 )
 animation = "Right"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
