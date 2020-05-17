@@ -1,27 +1,27 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enemy.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Die.tres" type="Animation" id=3]
 [ext_resource path="res://Hurt_Enemy.tres" type="Animation" id=4]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-void fragment() {
-COLOR = texture(TEXTURE, UV);//setup the default image
-float lum = (COLOR.r+COLOR.g+COLOR.b)/3.0;//get the average
-COLOR.xyz = vec3(lum);//set the average to get grayscale
-}
-
-"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 31.7224, 31.1921 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "Normal"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -30,7 +30,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -42,7 +42,7 @@ tracks/1/path = NodePath(".:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -54,8 +54,7 @@ tracks/1/keys = {
 radius = 120.651
 
 [node name="Enemy" type="Node2D"]
-material = SubResource( 2 )
-position = Vector2( 0.0921478, 0 )
+modulate = Color( 1, 1, 1, 0 )
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": ""
@@ -66,7 +65,6 @@ use_parent_material = true
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "Down"
-frame = 5
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -82,6 +80,7 @@ shape = SubResource( 3 )
 autoplay = "Reset"
 anims/Die = ExtResource( 3 )
 anims/Hurt = ExtResource( 4 )
+anims/Normal = SubResource( 8 )
 anims/Reset = SubResource( 4 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
