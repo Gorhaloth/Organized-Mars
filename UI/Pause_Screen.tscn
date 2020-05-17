@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/Pause_Screen.gd" type="Script" id=1]
+[ext_resource path="res://UI/Quit Button (Bottom) clone-1.png.png" type="Texture" id=2]
+[ext_resource path="res://UI/Pause Symbol-1.png.png" type="Texture" id=3]
+
+[node name="Pause_Screen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 424.0
+margin_bottom = 216.0
+color = Color( 0.956863, 0.937255, 0.937255, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 426.0
+margin_bottom = 220.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_right = 426.0
+margin_bottom = 220.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 165.0
+margin_top = 71.0
+margin_right = 261.0
+margin_bottom = 149.0
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/CenterContainer/VBoxContainer"]
+anchor_left = 0.36
+anchor_right = 0.36
+margin_right = 96.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 3 )
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 96.0
+margin_bottom = 78.0
+texture_normal = ExtResource( 2 )
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/TextureButton2" to="." method="_on_TextureButton2_pressed"]
