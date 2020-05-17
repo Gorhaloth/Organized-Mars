@@ -19,6 +19,7 @@ func _ready():
 	Gun = get_node_or_null("../Player/Gun")
 	if Gun != null:
 		Gun.connect("hit", self, "_on_hit")
+	is_in_group('Enemy')
 	
 
 func _physics_process(delta):

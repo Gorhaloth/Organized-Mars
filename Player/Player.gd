@@ -57,3 +57,8 @@ func direction():
 		Vector2(0,0):
 			$Sprite.playing = false
 			$Sprite.frame = 1	
+
+
+func _on_Area2D_area_entered(area):
+	if area.is_in_group('Enemy'):
+		print('bang')
