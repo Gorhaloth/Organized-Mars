@@ -27,10 +27,11 @@ func _physics_process(delta):
 		if abs((Player.position - position).length()) > 25:
 			velocity = (Player.position - position).normalized() * 1
 			angle = velocity.angle()
+			velocity = velocity *60
 			set_animation()
 		else:
 			velocity = Vector2(0,0)
-		move_and_collide(velocity)
+		move_and_slide(velocity)
 	#print(get_node("res://Player/Player.tscn"))
 
 func _on_hit(body):
