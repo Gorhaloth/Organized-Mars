@@ -5,13 +5,13 @@
 [ext_resource path="res://Die.tres" type="Animation" id=3]
 [ext_resource path="res://Hurt_Enemy.tres" type="Animation" id=4]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24.245, 26.1578 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.7224, 31.1921 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=3]
 resource_name = "Normal"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -62,14 +62,14 @@ collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 9 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "Down"
-frame = 10
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -79,13 +79,13 @@ collision_layer = 6
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Reset"
 anims/Die = ExtResource( 3 )
 anims/Hurt = ExtResource( 4 )
-anims/Normal = SubResource( 8 )
+anims/Normal = SubResource( 3 )
 anims/Reset = SubResource( 4 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
