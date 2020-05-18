@@ -7,6 +7,7 @@ const FRICTION = 800
 var velocity = Vector2.ZERO
 var input_vector
 var Enemy
+var mouse_position
 var health = 11
 var power = 30
 onready var timer = $Timer
@@ -27,6 +28,8 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	velocity = move_and_slide(velocity)
+	if Input.is_action_just_pressed("teleport"):
+		teleport()
 
 func direction():
 	match input_vector:
@@ -74,3 +77,11 @@ func _on_Timer_timeout():
 
 func _on_Area2D_area_exited(area):
 	timer.stop()
+
+func teleport():
+	if power <= 0:
+		return
+	mouse_position = get_global_mouse_position()
+	position = mouse_position
+	power -= 1
+	$HUD/PowerBar.frame = power
