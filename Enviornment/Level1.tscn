@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Enviornment/Enviornment Sprite Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Boulder1.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://UI/Game_Over.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Pause_Screen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enviornment/Level1.gd" type="Script" id=8]
+[ext_resource path="res://TitleScreen.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -132,3 +133,5 @@ visible = false
 
 [node name="Pause_Screen" parent="CanvasLayer" instance=ExtResource( 7 )]
 visible = false
+
+[node name="TitleScreen" parent="CanvasLayer" instance=ExtResource( 9 )]
